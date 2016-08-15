@@ -72,8 +72,11 @@ The benefit to this are:
 
 # Tools to Use with GWSAdux
 
+It is imperative that you convert your models to immutables using autovalue:
+
 [AutoValue developed by Google to generate the Immutables]()
 
+And to convert your collections containers in the network stream to read-only ones using Solid:
 
 [Solid developed by      to create some other collections read-only containers and the backported stream api]()
 
