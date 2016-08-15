@@ -70,6 +70,13 @@ The benefit to this are:
 
 # Articles
 
+# Tools to Use with GWSAdux
+
+[AutoValue developed by Google to generate the Immutables]()
+
+
+[Solid developed by      to create some other collections read-only containers and the backported stream api]()
+
 # Usage
 
 if library, describe how to download library using jitpack than describe how to use the library.
