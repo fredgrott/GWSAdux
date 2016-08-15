@@ -32,7 +32,7 @@ import java.util.UUID;
 /**
  * Represents an easy and type-safe access to {@link Alux}.
  * <p>
- * {@link Scope} is an interface to access internal state of a View,
+ * {@link Scope} is an interface to access internal state of a IView,
  * including its background tasks and callbacks.
  *
  * Created by fgrott on 8/14/2016.

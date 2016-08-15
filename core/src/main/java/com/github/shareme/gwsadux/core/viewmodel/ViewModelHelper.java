@@ -34,7 +34,7 @@ import timber.log.Timber;
  * Created by fgrott on 8/14/2016.
  */
 @SuppressWarnings("unused")
-public class ViewModelHelper<T extends View, R extends AbstractViewModel<T>> {
+public class ViewModelHelper<T extends IView, R extends AbstractViewModel<T>> {
 
   @Nullable
   private String mScreenId;

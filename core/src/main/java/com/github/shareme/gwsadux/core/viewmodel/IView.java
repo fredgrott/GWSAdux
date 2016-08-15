@@ -21,5 +21,5 @@ package com.github.shareme.gwsadux.core.viewmodel;
  * Created by fgrott on 8/14/2016.
  */
 
-public interface View {
+public interface IView {
 }

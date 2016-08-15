@@ -33,7 +33,7 @@ import java.util.HashMap;
 
 public class ViewModelProviderImpl {
 
-  private final HashMap<String, AbstractViewModel<? extends View>> mViewModelCache;
+  private final HashMap<String, AbstractViewModel<? extends IView>> mViewModelCache;
 
   public static ViewModelProviderImpl newInstance(@NonNull final AppCompatActivity activity) {
     if (activity.getLastCustomNonConfigurationInstance() == null) {
@@ -59,7 +59,7 @@ public class ViewModelProviderImpl {
 
   @SuppressWarnings("unchecked")
   @NonNull
-  public synchronized <T extends View> ViewModelWrapper<T> getViewModel(final String modelIdentifier,
+  public synchronized <T extends IView> ViewModelWrapper<T> getViewModel(final String modelIdentifier,
                                                                          final @NonNull Class<? extends AbstractViewModel<T>> viewModelClass) {
     AbstractViewModel<T> instance = (AbstractViewModel<T>) mViewModelCache.get(modelIdentifier);
     if (instance != null) {
@@ -76,7 +76,7 @@ public class ViewModelProviderImpl {
     }
   }
 
-  public static class ViewModelWrapper<T extends View> {
+  public static class ViewModelWrapper<T extends IView> {
     @NonNull
     public final AbstractViewModel<T> viewModel;
     public final boolean wasCreated;

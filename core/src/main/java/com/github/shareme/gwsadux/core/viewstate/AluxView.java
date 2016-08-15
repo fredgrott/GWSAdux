@@ -69,13 +69,13 @@ public interface AluxView<S extends ViewState> {
 
   /**
    * Creates an initial state.
-   * Must be implemented by a specific View implementation.
+   * Must be implemented by a specific IView implementation.
    */
   S initial();
 
   /**
    * Updated view from a given state.
-   * Must be implemented by a specific View implementation.
+   * Must be implemented by a specific IView implementation.
    */
   void update(S state);
 }

@@ -32,7 +32,7 @@ import timber.log.Timber;
  * Created by fgrott on 8/14/2016.
  */
 @SuppressWarnings("unused")
-public abstract class AbstractViewModel<T extends View> {
+public abstract class AbstractViewModel<T extends IView> {
 
   @Nullable
   private String mUniqueIdentifier;
@@ -71,8 +71,8 @@ public abstract class AbstractViewModel<T extends View> {
   }
 
   /**
-   * This method is an equivalent of {Fragment#onViewCreated(View, Bundle)} or {@link Activity#onCreate(Bundle)}.
-   * At this point, the View is ready and you can initialise it.
+   * This method is an equivalent of {Fragment#onViewCreated(IView, Bundle)} or {@link Activity#onCreate(Bundle)}.
+   * At this point, the IView is ready and you can initialise it.
    * @param view
    */
   public void onBindView(@NonNull T view) {
