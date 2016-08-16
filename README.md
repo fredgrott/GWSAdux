@@ -5,6 +5,8 @@ GWSAadux, an Android Application Architecture that is designed from the
 beginning to promote correct practices in App Responsiveness without 
 necessarily having to use RxJava or Agera.
 
+AS FAR AS I KNOW< GOOGLE DATA BINDING CAN ALSO BE USED WITH THIS FRAMEWORK
+
 # Premise
 
 Despite all the good things that RxJava and Agera do they do not directly 
@@ -115,9 +117,6 @@ Created by [Fred Grott](http://shareme.github.com).
 
 # Credits
 
-ViewModel Module:
-
-[AndroidViewmOdel developed by ]()
 
 ViewState Module:
 
@@ -127,6 +126,8 @@ ViewState Module:
 # References
 
 [EffectiveJava, 2nd Edition by ]()
+
+[Java Performance by Charlie Hunt]()
 
 
 

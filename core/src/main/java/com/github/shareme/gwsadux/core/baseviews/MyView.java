@@ -1,18 +1,3 @@
-/*
-  Copyright (C) 2016 Fred Grott(aka shareme GrottWorkShop)
-
-Licensed under the Apache License, Version 2.0 (the "License"); you
-may not use this file except in compliance with the License. You may
-obtain a copy of the License at
-
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an
-"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
-either express or implied. See the License for the specific language
-governing permissions and limitations under License.
- */
 package com.github.shareme.gwsadux.core.baseviews;
 
 import android.app.Activity;
@@ -29,10 +14,9 @@ import com.github.shareme.gwsadux.core.viewstate.Scope;
 import com.github.shareme.gwsadux.core.viewstate.ViewState;
 
 /**
- * Your custom views will extend this class.
- * Created by fgrott on 8/15/2016.
+ * Created by fgrott on 8/16/2016.
  */
-@SuppressWarnings("unused")
+
 public abstract class MyView<S extends ViewState> extends FrameLayout implements AluxView<S> {
 
   private static final String ALUX_SCOPE = "alux_scope";
@@ -105,7 +89,7 @@ public abstract class MyView<S extends ViewState> extends FrameLayout implements
   }
 
   @Override
-  public <T> void part(String name, T newValue, FieldUpdater<T> updater) {
+  public <T> void part(String name, T newValue, AluxView.FieldUpdater<T> updater) {
     adapter.part(name, newValue, updater);
   }
 
@@ -117,5 +101,4 @@ public abstract class MyView<S extends ViewState> extends FrameLayout implements
   @Override
   public void onScopeCreated(Scope<S> scope) {
   }
-
 }
