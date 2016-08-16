@@ -49,10 +49,18 @@ public class AluxViewAdapter<S extends ViewState> {
 
   private HashMap<String, Object> updated = new HashMap<>();
 
+  /**
+   *
+   * @param view the view
+   */
   public AluxViewAdapter(AluxView<S> view) {
     this.view = view;
   }
 
+  /**
+   * Restores from a bundle
+   * @param bundle the bundle
+   */
   public void onRestore(Bundle bundle) {
     if (scope != null)
       throw new IllegalStateException("onRestore() must be called before scope() and before onResume()");
@@ -61,6 +69,10 @@ public class AluxViewAdapter<S extends ViewState> {
     scope.register(callback);
   }
 
+  /**
+   * Returns the scope and if null initializes the view
+   * @return scope
+   */
   public Scope<S> scope() {
     if (scope == null) {
       scope = new Scope<>(view.initial());
@@ -70,6 +82,13 @@ public class AluxViewAdapter<S extends ViewState> {
     return scope;
   }
 
+  /**
+   * Updates fields of Alux enabled views
+   * @param name the name
+   * @param newValue the newValue
+   * @param updater the updater
+   * @param <T> T type
+   */
   public <T> void part(String name, T newValue, AluxView.FieldUpdater<T> updater) {
     if (!updated.containsKey(name) || updated.get(name) != newValue) {
       updater.call(newValue);
@@ -77,14 +96,23 @@ public class AluxViewAdapter<S extends ViewState> {
     }
   }
 
+  /**
+   * Clear parts
+   */
   public void resetParts() {
     updated.clear();
   }
 
+  /**
+   * Update view with scope state
+   */
   public void onResume() {
     view.update(scope().state());
   }
 
+  /**
+   * Unregister the scope callback upon onDestroy lifecycle events
+   */
   public void onDestroy() {
     scope.unregister(callback);
   }

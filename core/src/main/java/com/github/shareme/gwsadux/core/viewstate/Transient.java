@@ -15,18 +15,34 @@ public class Transient<T> implements Parcelable {
 
   public final T value;
 
+  /**
+   * Creates new Transient with null value as the type
+   */
   public Transient() {
     value = null;
   }
 
+  /**
+   * gets the T type
+   * @return value
+   */
   public T get() {
     return value;
   }
 
+  /**
+   * retruns true if value is not null
+   * @return true if value is not null
+   */
   public boolean isPresent() {
     return value != null;
   }
 
+  /**
+   * returns a new empty Transient
+   * @param <T> T type
+   * @return an empty transient
+   */
   @SuppressWarnings("unchecked")
   public static <T> Transient<T> empty() {
     return EMPTY;
@@ -44,10 +60,19 @@ public class Transient<T> implements Parcelable {
     this.value = value;
   }
 
+  /**
+   * NOOP by design
+   * @param dest the dest
+   * @param flags the flags
+   */
   @Override
   public void writeToParcel(Parcel dest, int flags) {
   }
 
+  /**
+   * describe contents as an int
+   * @return zero as int
+   */
   @Override
   public int describeContents() {
     return 0;
@@ -65,6 +90,11 @@ public class Transient<T> implements Parcelable {
     }
   };
 
+  /**
+   * equate the objects
+   * @param o o
+   * @return true or false
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

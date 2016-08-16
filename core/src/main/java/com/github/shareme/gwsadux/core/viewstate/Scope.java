@@ -62,6 +62,7 @@ public class Scope<S extends ViewState> {
   /**
    * Returns the current scope's state.
    */
+  @SuppressWarnings("unchecked")
   public S state() {
     return (S) Alux.INSTANCE.state(key);
   }
