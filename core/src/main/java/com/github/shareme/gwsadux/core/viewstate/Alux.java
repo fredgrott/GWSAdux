@@ -54,6 +54,11 @@ public enum Alux {
   private AtomicReference<Map<String, Scope>> root = new AtomicReference<>(Collections.<String, Scope>emptyMap());
   private Handler mainHandler = new Handler(Looper.getMainLooper());
 
+  /**
+   * Creates the initial scope
+   * @param key the key
+   * @param initialState the initialState
+   */
   public void create(final String key, final ViewState initialState) {
     ScopeTransactionResult result = swapScope(key, new ScopeTransaction() {
       @Override
@@ -61,10 +66,17 @@ public enum Alux {
         return new Scope(initialState);
       }
     });
-    for (Map.Entry<Integer, Background> entry : result.now.background.entrySet())
-      execute(key, entry.getKey(), entry.getValue());
+    if (result.now != null) {
+      for (Map.Entry<Integer, Background> entry : result.now.background.entrySet())
+        execute(key, entry.getKey(), entry.getValue());
+    }
   }
 
+  /**
+   * Restores the scope from the parcelable
+   * @param key the key
+   * @param scope the scope
+   */
   public void restore(final String key, final Parcelable scope) {
     ScopeTransactionResult result = swapScope(key, new ScopeTransaction() {
       @Override
@@ -73,20 +85,36 @@ public enum Alux {
       }
     });
     if (result.prev == null) {
-      for (Map.Entry<Integer, Background> entry : result.now.background.entrySet())
-        execute(key, entry.getKey(), entry.getValue());
+      if (result.now != null) {
+        for (Map.Entry<Integer, Background> entry : result.now.background.entrySet())
+          execute(key, entry.getKey(), entry.getValue());
+      }
     }
   }
 
+  /**
+   * Gets the parcelable
+   * @param key the key
+   * @return key fo the root
+   */
   public Parcelable get(String key) {
     return root.get().get(key);
   }
 
+  /**
+   * Returns the state via scope
+   * @param key the key
+   * @return the state from scope
+   */
   public ViewState state(String key) {
     Scope scope = root.get().get(key);
     return scope == null ? null : scope.state;
   }
 
+  /**
+   * removes the key
+   * @param key the key
+   */
   public void remove(final String key) {
     ScopeTransactionResult result = swapScope(key, new ScopeTransaction() {
       @Override
@@ -100,6 +128,13 @@ public enum Alux {
     }
   }
 
+  /**
+   * Our only function
+   * @param key the key
+   * @param function the function
+   * @param <S> S type
+   * @return the scope state
+   */
   @Nullable
   @SuppressWarnings("unchecked")
   public <S extends ViewState> ApplyResult<S> apply(final String key, final Function<S> function) {
@@ -111,6 +146,7 @@ public enum Alux {
     });
     if (result.now != null)
       callback(key, result.now);
+    assert result.now != null;
     return result.prev == null ? null : new ApplyResult(result.prev.state, result.now.state);
   }
 
@@ -291,6 +327,11 @@ public enum Alux {
       return new Scope(state, callbacks, background, cancellable);
     }
 
+    /**
+     *
+     * @param cancellable the cancellable
+     * @return a new scope
+     */
     public Scope withCancellable(Map<Integer, Cancellable> cancellable) {
       return new Scope(state, callbacks, background, cancellable);
     }
@@ -303,6 +344,11 @@ public enum Alux {
       this.cancellable = Collections.emptyMap();
     }
 
+    /**
+     *
+     * @param dest the dest
+     * @param flags the flags
+     */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeParcelable(state, flags);
@@ -314,6 +360,9 @@ public enum Alux {
       return 0;
     }
 
+    /**
+     *
+     */
     public static final Creator<Scope> CREATOR = new Creator<Scope>() {
       @Override
       public Scope createFromParcel(Parcel in) {
@@ -326,6 +375,10 @@ public enum Alux {
       }
     };
 
+    /**
+     * our toString
+     * @return scope
+     */
     @Override
     public String toString() {
       return "Scope{" +
